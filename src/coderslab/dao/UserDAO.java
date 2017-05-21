@@ -8,5 +8,6 @@ public interface UserDAO {
 	User insert(User user);
 	User update(User user, int id);
 	User getUserFromId(int id);
+	User delete(int id);
 	List<User> findAll();
 }

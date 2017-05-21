@@ -19,6 +19,7 @@ public class MySqlUserDAO implements UserDAO {
 	private static final String INSERT_USER_QUERY = "INSERT INTO users(username, surename, email, password) VALUES(?,?,?,?)";
 	private static final String UPDATE_ALL_IN_ID = "UPDATE users SET username=?, surename=?, email=?, password =? WHERE id=?;";
 	private static final String GET_USER_FROM_ID = "SELECT * FROM users WHERE id=?";
+	private static final String DELETE_USER_FROM_ID = "DELETE FROM users WHERE id=?";
 
 	public MySqlUserDAO(String jdbcUrl, String password, String user) {
 		super();
@@ -117,4 +118,18 @@ public class MySqlUserDAO implements UserDAO {
 		return null;
 	}
 
+	@Override
+	public User delete(int id) {
+		try (Connection connection = createConnection();
+				PreparedStatement deleteStm = connection.prepareStatement(DELETE_USER_FROM_ID);) {
+			deleteStm.setInt(1, id);
+			int result = deleteStm.executeUpdate();
+			if (result != 1) {
+				throw new RuntimeException("Executed updated returned" + result);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
