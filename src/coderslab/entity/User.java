@@ -11,7 +11,22 @@ public class User {
 
 	}
 
-	public User(Integer id, String username, String surname, String email, String password) {
+	public User(String username, String surname, String email, String password) {
+
+		this.username = username;
+		this.surname = surname;
+		this.email = email;
+		this.password = password;
+	}
+	/**
+	 * This constructor is used to create new object from database
+	 * @param id 
+	 * @param username
+	 * @param surname
+	 * @param email
+	 * @param password
+	 */
+	public User(int id, String username, String surname, String email, String password) {
 		this.id = id;
 		this.username = username;
 		this.surname = surname;
@@ -58,7 +73,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public void toStringUser() {
 		System.out.println(this.id + this.username + this.surname + this.email);
 	}
